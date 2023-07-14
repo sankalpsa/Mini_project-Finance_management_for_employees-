@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Set Salary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 50px 30px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      color: #007bff;
+      font-size: 30px;
+      margin-top: 0;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: #007bff;
+    }
+
+    input[type="submit"] {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Set Salary</h1>
+    <form action="emp-setsalaryphp.php" method="post">
+      <label for="jobtitle">Designation</label>
+      <select id="jobtitle" class="w3-input w3-light-grey w3-animate-input" name="jobtitle">
+        <option value="executive">Executive</option>
+        <option value="manager">Manager</option>
+        <option value="director">Director</option>
+        <option value="accountant">Accountant</option>
+        <option value="chief">Chief</option>
+      </select>
+
+      <label for="salary">Salary</label>
+      <input type="number" id="salary" class="w3-input w3-light-grey w3-animate-input" name="salary">
+
+      <input type="submit" value="Submit" class="w3-input w3-green w3-round-xxlarge w3-animate-input w3-hover-blue">
+    </form>
+  </div>
+</body>
+</html>
