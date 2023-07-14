@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Employee</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 50px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="container">
+    <?php
+      // Check if the form is submitted
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Include the database configuration file
+        require('configall.php');
+        
+        // Get the form data
+        $empid = $_POST['empid'];
+        $name = $_POST['name'];
+        $dob = $_POST['dob'];
+        $gender = $_POST['gender'];
+        $sdate = $_POST['sdate'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $jobtitle = $_POST['jobtitle'];
+        $bacc = $_POST['bacc'];
+        $address = $_POST['address'];
+        $depid = $_POST['depid'];
+        $managedepid = $_POST['managedepid'];
+        
+        // Prepare the SQL statement
+        $sql = "INSERT INTO employee (Employee_id, Name, dob, gender, Start_date, Email, Phone_no, jobtitle, bank_accno, Address, Depart_id, managesDepart_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($connection, $sql);
+        
+        // Bind the parameters and execute the statement
+        mysqli_stmt_bind_param($stmt, "isssssssssii", $empid, $name, $dob, $gender, $sdate, $email, $phone, $jobtitle, $bacc, $address, $depid, $managedepid);
+        $result = mysqli_stmt_execute($stmt);
+        
+        if ($result) {
+          // Redirect to a success page or display a success message
+          echo "Employee added successfully!";
+        } else {
+          // Display an error message
+          echo "Something went wrong. Please try again.";
+        }
+        
+        // Close the statement and the database connection
+        mysqli_stmt_close($stmt);
+        mysqli_close($connection);
+      }
+    ?>
+    <form class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+      <div class="form-group">
+        <label class="form-label" for="empid">Employee ID</label>
+        <input class="form-input" type="number" name="empid" id="empid" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-input" type="text" name="name" id="name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="dob">Date of Birth</label>
+        <input class="form-input" type="date" name="dob" id="dob" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Gender</label><br>
+        <input type="radio" name="gender" value="male" checked> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="sdate">Joining Date</label>
+        <input class="form-input" type="date" name="sdate" id="sdate" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" name="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="phone">Phone</label>
+        <input class="form-input" type="text" name="phone" id="phone" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="jobtitle">Job Title</label>
+        <select class="form-input" name="jobtitle" id="jobtitle">
+          <option value="executive">Executive</option>
+          <option value="manager">Manager</option>
+          <option value="director">Director</option>
+          <option value="accountant">Accountant</option>
+          <option value="chief">Chief</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="bacc">Bank Account No</label>
+        <input class="form-input" type="number" name="bacc" id="bacc" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="address">Address</label>
+        <input class="form-input" type="text" name="address" id="address" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="depid">Employee Department</label>
+        <input class="form-input" type="number" name="depid" id="depid" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="managedepid">Managing Department</label>
+        <input class="form-input" type="number" name="managedepid" id="managedepid">
+      </div>
+      <input type="submit" value="Submit" class="submit-btn">
+    </form>
+  </div>
+</body>
+</html>
