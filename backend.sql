@@ -1,9 +1,8 @@
 
-CREATE TABLE admin (
-    id INT PRIMARY KEY,
-    username VARCHAR(45) NOT NULL,
-    password VARCHAR(45) NOT NULL,
-    user_type VARCHAR(10) NOT NULL
+CREATE TABLE admin(
+id INT PRIMARY KEY,
+username VARCHAR(45) NOT NULL,
+password VARCHAR(45) NOT NULL
 );
 
 
